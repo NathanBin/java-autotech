@@ -1,13 +1,19 @@
 package sql;
 
 public class GestaoAcesso {
-    private Integer idGestaoAcesso;
+    private Integer idCliente;
+    private String nome;
+    private String cnpj;
+    private String nomeEmpresa;
     private String email;
     private String senha;
     private Integer nivel;
 
-    public GestaoAcesso(Integer idGestaoAcesso, String email, String senha, Integer nivel) {
-        this.idGestaoAcesso = idGestaoAcesso;
+    public GestaoAcesso(Integer idCliente, String nome, String cnpj, String nomeEmpresa, String email, String senha, Integer nivel) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.nomeEmpresa = nomeEmpresa;
         this.email = email;
         this.senha = senha;
         this.nivel = nivel;
@@ -16,16 +22,37 @@ public class GestaoAcesso {
     public GestaoAcesso() {
     }
 
-    public Integer getIdGestaoAcesso() {
-        return idGestaoAcesso;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdGestaoAcesso(Integer idGestaoAcesso) {
-        this.idGestaoAcesso = idGestaoAcesso;
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
-    
-    
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
+    }
+
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
+    }
 
     public String getEmail() {
         return email;
@@ -53,7 +80,7 @@ public class GestaoAcesso {
 
     @Override
     public String toString() {
-        return "gestaoAcesso{" + ", email=" + email + ", senha=" + senha + ", nivel=" + nivel + '}';
+        return "GestaoAcesso{" + "idCliente=" + idCliente + ", nome=" + nome + ", cnpj=" + cnpj + ", nomeEmpresa=" + nomeEmpresa + ", email=" + email + ", senha=" + senha + ", nivel=" + nivel + '}';
     }
     
 }
