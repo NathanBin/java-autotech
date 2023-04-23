@@ -156,7 +156,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 new GestaoAcessoRowMapper(), u_email, u_senha);
         
         if(!acessos.isEmpty()){
-            Finish telaFinal = new Finish();
+            InitCarregar telaFinal = new InitCarregar(acessos.get(0).getIdGestaoAcesso());
+            //Finish telaFinal = new Finish(acessos.get(0).getIdGestaoAcesso());
             telaFinal.setVisible(true);
             this.setVisible(false);
         }else{
