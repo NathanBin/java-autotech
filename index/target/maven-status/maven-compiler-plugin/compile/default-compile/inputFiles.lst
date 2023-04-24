@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\com\mycompany\index\Finish.java
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\com\mycompany\index\InitCarregar.java
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\com\mycompany\index\TelaLogin.java
@@ -5,3 +6,16 @@ C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\sql\GestaoAcessoRowMapp
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\sql\Sql.java
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\com\mycompany\index\AutoTech.java
 C:\Users\s6mue\Desktop\java-autotech\index\src\main\java\sql\GestaoAcesso.java
+=======
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/ComponenteRowMapper.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/com/mycompany/index/TelaLogin.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/com/mycompany/index/InitCarregar.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/Sql.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/GestaoAcesso.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/Componente.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/com/mycompany/index/Finish.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/Hardware.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/GestaoAcessoRowMapper.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/com/mycompany/index/AutoTech.java
+/home/nathan/Documentos/java-autotech/index/src/main/java/sql/HardwareRowMapper.java
+>>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec

@@ -9,7 +9,10 @@ public class GestaoAcessoRowMapper implements RowMapper<GestaoAcesso>{
     @Override
     public GestaoAcesso mapRow(ResultSet rs, int rowNum) throws SQLException {
         GestaoAcesso gestaoAcesso = new GestaoAcesso();
-        gestaoAcesso.setIdGestaoAcesso(rs.getInt("id_gestao_acesso"));
+        gestaoAcesso.setIdCliente(rs.getInt("id_cliente"));
+        gestaoAcesso.setNome(rs.getString("nome"));
+        gestaoAcesso.setCnpj(rs.getString("cnpj"));
+        gestaoAcesso.setNomeEmpresa(rs.getString("nome_empresa"));
         gestaoAcesso.setEmail(rs.getString("email"));
         gestaoAcesso.setSenha(rs.getString("senha"));
         gestaoAcesso.setNivel(rs.getInt("nivel"));
