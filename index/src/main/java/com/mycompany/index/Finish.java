@@ -20,8 +20,10 @@ public class Finish extends javax.swing.JFrame {
     public Finish() {
         initComponents();
         setLocationRelativeTo(null);
-
+        
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,7 +108,7 @@ public class Finish extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Finish().setVisible(true);
-            
+           
         });
 
     }
