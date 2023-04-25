@@ -275,6 +275,8 @@ public class InitCarregar extends javax.swing.JFrame {
     
     DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
     
+    Boolean primeiraVez = false;
+    
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
         
@@ -339,6 +341,12 @@ public class InitCarregar extends javax.swing.JFrame {
                     c2.getIdComponente(), c2.getFkHardware(), c2.getFkUnidade(), c2.getFkCliente(), c2.getFkModeloComponente(), porcentagemDisco,
                     c3.getIdComponente(), c3.getFkHardware(), c3.getFkUnidade(), c3.getFkCliente(), c3.getFkModeloComponente(), (emUso/total*100)
                 );
+                System.out.println(((emUso/total*100)));
+                
+                if((emUso/total*100) > 30 && !primeiraVez){
+                    new Alert().setVisible(true);
+                    primeiraVez = true;
+                }
                 
                 
                 
