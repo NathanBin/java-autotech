@@ -7,7 +7,6 @@ public class AutoTech extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
-        
          
         
     }
@@ -78,8 +77,6 @@ public class AutoTech extends javax.swing.JFrame {
         telaLogin.setVisible(true);
         this.setVisible(false);
         telaLogin.setLocationRelativeTo(null);
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

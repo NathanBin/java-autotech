@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 sql/Sql.class
 com/mycompany/index/InitCarregar$3.class
 com/mycompany/index/TelaLogin$1.class
@@ -22,4 +20,3 @@ sql/Componente.class
 com/mycompany/index/InitCarregar$2.class
 sql/HardwareRowMapper.class
 sql/ComponenteRowMapper.class
->>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec

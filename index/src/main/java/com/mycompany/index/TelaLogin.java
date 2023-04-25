@@ -4,8 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BorderFactory;
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.swing.Timer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -15,14 +14,8 @@ import sql.Sql;
 
 public class TelaLogin extends javax.swing.JFrame {
 
-<<<<<<< HEAD
-    /**
-     * Creates new form TelaLogin
-     */
-=======
     Timer t;
     
->>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec
     public TelaLogin() {
         initComponents();
         setLocationRelativeTo(null);
@@ -30,7 +23,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -136,19 +129,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
     Sql sql = new Sql();
     JdbcTemplate con = sql.getConnection();
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String u_email = String.valueOf(inEmail.getText());
         String u_senha = String.valueOf(inSenha.getText());
-<<<<<<< HEAD
-
-        List<GestaoAcesso> acessos = con.query("select * from gestao_acesso where email = ? and senha = ?",
-                new GestaoAcessoRowMapper(), u_email, u_senha);
-
-        if (!acessos.isEmpty()) {
-            Finish telaFinal = new Finish();
-=======
                 
         List<GestaoAcesso>acessos = con.query("exec realizar_login ?, ?", 
                 new GestaoAcessoRowMapper(), u_email, u_senha);
@@ -156,21 +141,15 @@ public class TelaLogin extends javax.swing.JFrame {
         if(!acessos.isEmpty()){
             InitCarregar telaFinal = new InitCarregar(acessos.get(0).getIdCliente());
             //Finish telaFinal = new Finish(acessos.get(0).getIdGestaoAcesso());
->>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec
             telaFinal.setVisible(true);
             this.setVisible(false);
-            new Timer().scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    telaFinal.setVisible(false);
-                }
-            }, 5000, 3000);
-        } else {
+        }else{
             incorreto.setVisible(true);
         }
-
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -180,7 +159,27 @@ public class TelaLogin extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -199,14 +198,19 @@ public class TelaLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaLogin().setVisible(true);
-
+                
+                
+                
             }
         });
-
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

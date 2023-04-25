@@ -8,12 +8,9 @@ public class Finish extends javax.swing.JFrame {
     public Finish(Integer id) {
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
     
-<<<<<<< HEAD
-
-=======
     public static void setTimeout(Runnable runnable, int delay){
         new Thread(() -> {
             try {
@@ -28,7 +25,6 @@ public class Finish extends javax.swing.JFrame {
             }
         }).start();
     }
->>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,13 +76,8 @@ public class Finish extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {
-<<<<<<< HEAD
-            new Finish().setVisible(true);
-           
-=======
             //new Finish().setVisible(true);
             setTimeout(() -> System.out.println("test"), 4000);
->>>>>>> d236a8a9d67e7dda4a1cdf8d64b2bc846c5dc3ec
         });
         
         
