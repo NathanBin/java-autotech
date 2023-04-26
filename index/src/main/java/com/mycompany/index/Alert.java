@@ -4,6 +4,11 @@
  */
 package com.mycompany.index;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author s6mue
@@ -93,13 +98,32 @@ public class Alert extends javax.swing.JFrame {
         Carregamento TelaCarregamento = new Carregamento();
         TelaCarregamento.setVisible(true);
         this.setVisible(false);
-         
         
+        String[] env = {"PATH=/bin:/usr/bin/"};
+
+        //String cmd = System.getProperty( "user.dir" ) + "/config/atualiza.sh";
+        
+        Runtime run = Runtime.getRuntime();
+        String caminho = "cd ~/";
+        //String command = "./a.sh ";
+        String deuCerto = "echo ok";
+        
+        String[] cmd = { "/bin/sh", "cd ~/Downloads", "./teste.sh"};
+
+        try { 
+            //run.exec(caminho);
+            //run.exec(command);
+            run.exec(deuCerto);
+            Process p = Runtime.getRuntime().exec(cmd);
+            
+            System.out.println(p);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         
         //System.exit(0);  
        //this.setEnabled(false);
        
-        System.out.println("teste");
         
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoActionPerformed
