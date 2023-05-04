@@ -4,8 +4,10 @@
  */
 package com.mycompany.index;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -93,33 +95,15 @@ public class Alert extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoActionPerformed
-   
-        
+        try{
+            limpar();
+        }
+        catch(IOException e){
+            
+        }
         Carregamento TelaCarregamento = new Carregamento();
         TelaCarregamento.setVisible(true);
         this.setVisible(false);
-        
-        String[] env = {"PATH=/bin:/usr/bin/"};
-
-        //String cmd = System.getProperty( "user.dir" ) + "/config/atualiza.sh";
-        
-        Runtime run = Runtime.getRuntime();
-        String caminho = "cd ~/";
-        //String command = "./a.sh ";
-        String deuCerto = "echo ok";
-        
-        String[] cmd = { "/bin/sh", "cd ~/Downloads", "./teste.sh"};
-
-        try { 
-            //run.exec(caminho);
-            //run.exec(command);
-            run.exec(deuCerto);
-            Process p = Runtime.getRuntime().exec(cmd);
-            
-            System.out.println(p);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         
         //System.exit(0);  
        //this.setEnabled(false);
@@ -128,6 +112,21 @@ public class Alert extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoActionPerformed
 
+    public void limpar() throws IOException{
+        String scriptPath = "/home/nathan/Downloads/clean.sh";
+
+        ProcessBuilder processBuilder = new ProcessBuilder("bash", scriptPath);
+
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine())!=null){
+            System.out.println(line);
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
