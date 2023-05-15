@@ -113,7 +113,7 @@ public class Alert extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoActionPerformed
 
     public void limpar() throws IOException{
-        String scriptPath = "/home/ubuntu/Desktop/Script/script.sh";
+        String scriptPath = "/home/ubuntu/Desktop/Script/clean.sh";
 
         ProcessBuilder processBuilder = new ProcessBuilder("bash", scriptPath);
 
