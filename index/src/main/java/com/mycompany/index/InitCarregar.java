@@ -298,7 +298,7 @@ public class InitCarregar extends javax.swing.JFrame {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Atualziando os dados");
+                System.out.println("Atualizando os dados");
                 
                 Double emUso = memoria.getEmUso().doubleValue();
                 Double total = memoria.getTotal().doubleValue();
