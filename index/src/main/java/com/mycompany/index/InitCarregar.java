@@ -303,7 +303,7 @@ public class InitCarregar extends javax.swing.JFrame {
         Componente c3 = componentes.get(2);
         
         int MAX_FILE_SIZE = 1000000; // Tamanho máximo do arquivo em bytes
-        String LOG_DIRECTORY = "/home/ubuntu/Desktop/logs"; // Diretório de logs
+        String LOG_DIRECTORY = "/home/ubuntu/Desktop/Logs"; // Diretório de logs
         String LOG_FILE_PREFIX = "logs"; // Prefixo do nome do arquivo de log
         String LOG_FILE_EXTENSION = ".txt"; // Extensão do arquivo de log
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Formato da data/hora para o log
