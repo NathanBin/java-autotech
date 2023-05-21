@@ -10,6 +10,7 @@ public class GestaoAcessoRowMapper implements RowMapper<GestaoAcesso>{
     public GestaoAcesso mapRow(ResultSet rs, int rowNum) throws SQLException {
         GestaoAcesso gestaoAcesso = new GestaoAcesso();
         gestaoAcesso.setIdCliente(rs.getInt("id_cliente"));
+        gestaoAcesso.setIdUnidade(rs.getInt("id_unidade"));
         gestaoAcesso.setNome(rs.getString("nome"));
         gestaoAcesso.setCnpj(rs.getString("cnpj"));
         gestaoAcesso.setNomeEmpresa(rs.getString("nome_empresa"));

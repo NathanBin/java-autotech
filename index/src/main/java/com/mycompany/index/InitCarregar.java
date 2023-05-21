@@ -21,22 +21,28 @@ import org.json.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sql.Componente;
 import sql.ComponenteRowMapper;
+import sql.ConexaoMySql;
 import sql.GestaoAcesso;
 import sql.GestaoAcessoRowMapper;
 import sql.Hardware;
 import sql.HardwareRowMapper;
 import sql.Sql;
 import util.Log;
+import util.LoocaApi;
 import util.SlackApi;
 
 public class InitCarregar extends javax.swing.JFrame {
 
-    private Integer id;
+    private GestaoAcesso user;
+    private Componente c1;
+    private Componente c2;
+    private Componente c3;
+    private String numSerie;
 
-    public InitCarregar(Integer id) {
+    public InitCarregar(GestaoAcesso user) {
         initComponents();
         setLocationRelativeTo(null);
-        this.id = id;
+        this.user = user;
     }
 
     @SuppressWarnings("unchecked")
@@ -260,17 +266,41 @@ public class InitCarregar extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        List<Hardware>hardwares = con.query("select * from hardware where fk_cliente = ?", 
-                new HardwareRowMapper(), id);
+        numSerie = processador.getId();
+        LoocaApi loocaApi = new LoocaApi();
         
-        selHardware.removeAllItems();
+        List<Componente>componentes = con.query(
+                "select c.id_componente, c.fk_hardware, c.fk_unidade, c.fk_cliente, c.fk_modelo_componente"
+                + " from componente as c join hardware on id_hardware = c.fk_hardware where numero_serie = ?", 
+                new ComponenteRowMapper(), numSerie);
         
-        for (Hardware hardware : hardwares) {
-            selHardware.addItem(hardware.getNumeroSerie());
+        if(componentes.isEmpty()){
+            con.update("exec inserir_hardware ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;",
+                    user.getIdCliente(), user.getIdUnidade(), numSerie, loocaApi.getSistemaOperacional(),
+                    loocaApi.getModeloCpu(), loocaApi.getModeloDisco(), loocaApi.getModeloMemoria(),
+                    loocaApi.getCapacidadeCpu(), loocaApi.getCapacidadeDisco(), loocaApi.getCapacidadeMemoria());
+            
+            List<Componente>componentesCadastrados = con.query(
+                "select c.id_componente, c.fk_hardware, c.fk_unidade, c.fk_cliente, c.fk_modelo_componente"
+                + " from componente as c join hardware on id_hardware = c.fk_hardware where numero_serie = ?", 
+                new ComponenteRowMapper(), numSerie);
+            
+            c1 = componentesCadastrados.get(0);
+            c2 = componentesCadastrados.get(1);
+            c3 = componentesCadastrados.get(2);
+            
+            System.out.println("Novo hardware cadastrado no banco!");
+        }else{
+            c1 = componentes.get(0);
+            c2 = componentes.get(1);
+            c3 = componentes.get(2);
+            
+            System.out.println("Hardware já existente no banco!");
         }
 
     }//GEN-LAST:event_formWindowOpened
 
+    ConexaoMySql mysql = new ConexaoMySql();
     Sql sql = new Sql();
     JdbcTemplate con = sql.getConnection();
     
@@ -286,21 +316,6 @@ public class InitCarregar extends javax.swing.JFrame {
     Boolean primeiraVez = false;
     
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        
-        String numSerie = (String) selHardware.getSelectedItem();
-        
-         List<Componente>componentes = con.query(
-                "select c.id_componente, c.fk_hardware, c.fk_unidade, c.fk_cliente, c.fk_modelo_componente"
-                + " from componente as c join hardware on id_hardware = c.fk_hardware where numero_serie = ?", 
-                new ComponenteRowMapper(), numSerie);
-         
-         for (Componente c : componentes) {
-             System.out.println(c);
-        }
-         
-        Componente c1 = componentes.get(0);
-        Componente c2 = componentes.get(1);
-        Componente c3 = componentes.get(2);
         
         int MAX_FILE_SIZE = 1000000; // Tamanho máximo do arquivo em bytes
         String LOG_DIRECTORY = "/home/ubuntu/Desktop/Logs"; // Diretório de logs
@@ -358,6 +373,10 @@ public class InitCarregar extends javax.swing.JFrame {
                     c2.getIdComponente(), c2.getFkHardware(), c2.getFkUnidade(), c2.getFkCliente(), c2.getFkModeloComponente(), porcentagemDisco,
                     c3.getIdComponente(), c3.getFkHardware(), c3.getFkUnidade(), c3.getFkCliente(), c3.getFkModeloComponente(), (emUso/total*100)
                 );
+                mysql.setRegistro(c1.getIdComponente(), c2.getIdComponente(), c3.getIdComponente(), c1.getFkHardware(),
+                        c1.getFkUnidade(), c1.getFkCliente(), c1.getFkModeloComponente(), c2.getFkModeloComponente(), c3.getFkModeloComponente(),
+                        processador.getUso(), (emUso/total*100), porcentagemDisco);
+                
                 System.out.println(((emUso/total*100)));
                 
                 if((emUso/total*100) > 30 && !primeiraVez){
