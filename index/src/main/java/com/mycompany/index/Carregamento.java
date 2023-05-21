@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.index;
 
 import java.awt.Color;
@@ -11,10 +7,6 @@ import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author s6mue
- */
 public class Carregamento extends javax.swing.JFrame {
 
     /**
@@ -52,20 +44,15 @@ public class Carregamento extends javax.swing.JFrame {
             while (jProgressBar1.getValue() < 100) {
 
                 try {
-                    sleep(150);
+                    sleep(60);
                     jProgressBar1.setValue(jProgressBar1.getValue() + 1);
-                    
-                    
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                {
 
-                }
             }
             
-            System.exit(0);  
         }
     }
 
@@ -157,7 +144,7 @@ public class Carregamento extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Carregamento().setVisible(true);
-
+                
             }
         });
     }

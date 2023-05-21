@@ -8,10 +8,16 @@ import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.rede.RedeInterface;
 import com.github.britooo.looca.api.group.rede.RedeInterfaceGroup;
 import com.github.britooo.looca.api.util.Conversor;
+import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sql.Componente;
 import sql.ComponenteRowMapper;
@@ -20,6 +26,8 @@ import sql.GestaoAcessoRowMapper;
 import sql.Hardware;
 import sql.HardwareRowMapper;
 import sql.Sql;
+import util.Log;
+import util.SlackApi;
 
 public class InitCarregar extends javax.swing.JFrame {
 
@@ -278,7 +286,6 @@ public class InitCarregar extends javax.swing.JFrame {
     Boolean primeiraVez = false;
     
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        // TODO add your handling code here:
         
         String numSerie = (String) selHardware.getSelectedItem();
         
@@ -295,6 +302,19 @@ public class InitCarregar extends javax.swing.JFrame {
         Componente c2 = componentes.get(1);
         Componente c3 = componentes.get(2);
         
+        int MAX_FILE_SIZE = 1000000; // Tamanho máximo do arquivo em bytes
+        String LOG_DIRECTORY = "/home/ubuntu/Desktop/logs"; // Diretório de logs
+        String LOG_FILE_PREFIX = "logs"; // Prefixo do nome do arquivo de log
+        String LOG_FILE_EXTENSION = ".txt"; // Extensão do arquivo de log
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Formato da data/hora para o log
+        String dataAtual = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        
+        Log log = new Log();
+        String timestamp = dateFormat.format(new Date());
+        String fileName = log.getLogFileName(LOG_DIRECTORY, LOG_FILE_PREFIX, dataAtual, LOG_FILE_EXTENSION);
+        log.log(Log.LogLevel.START, "Autotech Log " + timestamp, fileName);
+        log.log(Log.LogLevel.INFO, "\n" + looca.getSistema().toString(), fileName);
+        
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -309,7 +329,6 @@ public class InitCarregar extends javax.swing.JFrame {
                 
                 inRam.setText(String.format("%.2f",(emUso/total*100)));
                 
-                
                 for (RedeInterface redeInterface : redeInterfaces) {
             
                     if(redeInterface.getPacotesRecebidos().doubleValue() > redePrincipal.getPacotesRecebidos().doubleValue()){
@@ -319,7 +338,6 @@ public class InitCarregar extends javax.swing.JFrame {
         
                 inDownload.setText(Conversor.formatarBytes(redePrincipal.getBytesRecebidos()));
                 inUpload.setText(Conversor.formatarBytes(redePrincipal.getBytesEnviados()));
-                
                 
                 List<Volume>volumes = grupoDeDiscos.getVolumes();
                 for (Volume volume : volumes){
@@ -331,7 +349,6 @@ public class InitCarregar extends javax.swing.JFrame {
                 }
                 
                 inDisco.setText(String.format("%.2f", porcentagemDisco));
-                
                 
                 con.update("insert into metrica (fk_componente, fk_hardware, fk_unidade, fk_cliente, fk_modelo_componente, porcentagem_uso, dt_hora) values "
                     + "(?, ?, ?, ?, ?, ?, dateadd(hour, -3, getdate())),"
@@ -348,8 +365,32 @@ public class InitCarregar extends javax.swing.JFrame {
                     primeiraVez = true;
                 }
                 
+                if((emUso/total*100) > 80.0 || processador.getUso() > 80.0 || porcentagemDisco > 80.0){
+                    JSONObject json = new JSONObject();
+                    
+                    if(processador.getUso() > 80.0){
+                        json.put("text", "O limite de 80% de uso da cpu foi atingido!");
+                        log.log(Log.LogLevel.WARNING, "Limite de 80% de uso da cpu foi atingido!", fileName);
+                    }
+                    
+                    if((emUso/total*100) > 80.0){
+                        json.put("text", "O limite de 80% de uso da memória foi atingido!");
+                        log.log(Log.LogLevel.WARNING, "Limite de 80% de uso da memória foi atingido!", fileName);
+                    }
+                    
+                    if(porcentagemDisco > 80.0){
+                        json.put("text", "O limite de 80% de uso do disco foi atingido!");
+                        log.log(Log.LogLevel.WARNING, "Limite de 80% de uso da disco foi atingido!", fileName);
+                    }
+                    
+                    try {
+                        SlackApi.sendMessage(json);
+                    } catch (Exception e) {
+                        Logger.getLogger(InitCarregar.class.getName()).log(Level.SEVERE, null, e);
+                    }
                 
-                
+                }
+    
             }
         }, 0, 5000);
     }//GEN-LAST:event_btnIniciarActionPerformed

@@ -71,6 +71,12 @@
             <groupId>com.github.britooo</groupId>
             <artifactId>looca-api</artifactId>
             <version>2.2.0</version>
-          </dependency>
+        </dependency>
+          
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
+        </dependency>
     </dependencies>
 </project>
