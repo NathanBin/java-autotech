@@ -20,7 +20,7 @@ services:
       app_net:
         ipv4_address: 172.20.0.2
 networks:
-  db-test:
+  app_net:
     driver: bridge
     ipam:
       driver: default
