@@ -48,6 +48,12 @@ cd ~/Desktop
 
 mkdir Logs
 
+cd ./Logs
+
+mkdir RegistrosAntigos
+
+cd ~/Desktop
+
 #Docker
 
 docker --version
@@ -127,11 +133,9 @@ if [ $? = 0 ]
 
 fi
 
-echo "alias start='cd ~/Downloads; java -jar index-1.0-SNAPSHOT-jar-with-dependencies.jar'">>$HOME/.bash_aliases
+echo "alias start='cd ~/Downloads; sudo docker start AutotechDB; java -jar index-1.0-SNAPSHOT-jar-with-dependencies.jar'">>$HOME/.bash_aliases
 
-cd
-
-source .bash_aliases
+cd $HOME; source .bash_aliases
 
 clear
 
