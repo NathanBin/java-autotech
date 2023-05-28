@@ -33,6 +33,14 @@ public class LoocaApi {
         grupoDeDiscos = looca.getGrupoDeDiscos();
     }
     
+    public void setBytesRecebidos(long bytesRecebidos){
+        this.bytesRecebidosAnterior = bytesRecebidos;
+    }
+    
+    public void setBytesEnviados(long bytesRecebidos){
+        this.bytesRecebidosAnterior = bytesRecebidos;
+    }
+    
     public String getNumSerie(){
         return processador.getId();
     }
@@ -110,6 +118,14 @@ public class LoocaApi {
                 redePrincipal = rede;
             }
         }
+    }
+    
+    public long getBytesEnviados(){
+        return redePrincipal.getBytesEnviados();
+    }
+    
+    public long getBytesRecebidos(){
+        return redePrincipal.getBytesRecebidos();
     }
     
     public Double getDownload() throws InterruptedException {
