@@ -23,7 +23,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.index.AutoTech</mainClass> 
+                            <mainClass>jframe.AutoTech</mainClass> 
                         </manifest>
                     </archive>
                 </configuration>
