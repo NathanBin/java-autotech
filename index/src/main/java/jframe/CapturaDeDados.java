@@ -249,10 +249,11 @@ public class CapturaDeDados extends javax.swing.JFrame {
                 inRam.setText(String.format("%.2f",loocaApi.getMemoria()));
                 inDisco.setText(String.format("%.2f", loocaApi.getDisco()));
                 try{
-                inDownload.setText(String.format("%.2f", loocaApi.getDownload()));
-                inUpload.setText(String.format("%.2f", loocaApi.getUpload()));                
+                    inDownload.setText(String.format("%.2f", loocaApi.getDownload()));
+                    inUpload.setText(String.format("%.2f", loocaApi.getUpload()));  
+                    mssql.setRegistrosRede(loocaApi.getDownload(), loocaApi.getUpload());
                 }catch(InterruptedException e){
-                    
+                    log.makeLog(LogLevel.ERROR, e.toString());
                 }
                 mssql.setRegistros(loocaApi.getCpu(), loocaApi.getMemoria(), loocaApi.getDisco());
                 mysql.setRegistro(mssql.getC1().getIdComponente(), mssql.getC2().getIdComponente(), mssql.getC3().getIdComponente(), mssql.getC1().getFkHardware(),
