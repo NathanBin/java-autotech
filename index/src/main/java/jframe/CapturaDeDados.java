@@ -240,7 +240,7 @@ public class CapturaDeDados extends javax.swing.JFrame {
                     Double upload = loocaApi.getUpload();
                     inDownload.setText(String.format("%.2f", download));
                     inUpload.setText(String.format("%.2f", upload));  
-                    mssql.setRegistrosRede(download, upload);
+                    mssql.setRegistrosRede(download * 10, upload * 10);
                 }catch(InterruptedException e){
                     log.makeLog(LogLevel.ERROR, e.toString());
                 }
