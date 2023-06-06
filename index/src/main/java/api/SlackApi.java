@@ -9,7 +9,7 @@ import util.LogLevel;
 
 public class SlackApi {
     
-    private static final String webhook = "https://hooks.slack.com/services/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";
+    private static final String webhook = "https://hooks.slack.com/services/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";
 
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
         HttpRequest.newBuilder(URI.create(webhook))

@@ -39,6 +39,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         inSenha.setBackground(new java.awt.Color(28, 28, 28));
         inSenha.setForeground(new java.awt.Color(255, 255, 255));
+        inSenha.setToolTipText("");
         inSenha.setCaretColor(new java.awt.Color(204, 204, 204));
         inSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
